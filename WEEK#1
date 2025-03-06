@@ -1,0 +1,87 @@
+import 'dart:math';
+void main() {
+  List<int> numbers = [10, 5, 20, 8, 15];
+  int largest = numbers.reduce(max);
+  print("The largest number is: $largest");
+}
+
+
+
+
+void main() {
+  List<int> numbers = [38, 27, 43, 3, 9, 82, 10];
+  print("Unsorted List: $numbers");
+  List<int> sortedList = mergeSort(numbers);
+  print("Sorted List: $sortedList");
+}
+
+List<int> mergeSort(List<int> list) {
+  if (list.length <= 1) {
+    return list; }
+  int mid = list.length ~/ 2; 
+  List<int> left = mergeSort(list.sublist(0, mid)); 
+  List<int> right = mergeSort(list.sublist(mid)); 
+  return merge(left, right); 
+}
+List<int> merge(List<int> left, List<int> right) {
+  List<int> result = [];
+  int i = 0, j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      result.add(left[i]);
+      i++;
+    } else {
+      result.add(right[j]);
+      j++;
+    }
+  }
+  result.addAll(left.sublist(i));
+  result.addAll(right.sublist(j))
+  return result;
+}
+
+
+
+
+
+
+
+
+
+class Stack<T> {
+  List<T> _stack = [];
+  void push(T value) {
+    _stack.add(value);
+  }
+  T pop() {
+    if (_stack.isEmpty) {
+      print("Stack is empty!");   
+    }
+    return _stack.removeLast();
+  }
+  T peek() {
+    if (_stack.isEmpty) 
+    return _stack.last;
+  }
+  bool isEmpty() {
+    return _stack.isEmpty;
+  }
+  int size() {
+    return _stack.length;
+  }
+  void display() {
+    print("Stack: $_stack");
+  }
+}
+
+void main() {
+  Stack<int> stack = Stack<int>();
+  stack.push(10);
+  stack.push(20);
+  stack.push(30);
+  stack.display(); 
+  print("Top element: ${stack.peek()}"); 
+  print("Popped element: ${stack.pop()}"); 
+  stack.display(); 
+  print("Is stack empty? ${stack.isEmpty()}"); 
+}
