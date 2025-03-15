@@ -1,0 +1,210 @@
+Q1
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+      ),
+      home: const MyHomePage(title: 'Flutter  Home '),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+
+
+Q2
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Twitter',
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.blue,
+        body: Center(child: Icon(Icons.star, color: Colors.white, size: 185)),
+      ),
+    );
+  }
+}
+
+
+
+Q3
+
+MAIN.DART
+
+import 'package:flutter/material.dart';
+import 'text.dart';
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'facebook',
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(backgroundColor: Colors.white, body: const TextWidget()),
+    );
+  }
+}
+
+
+
+
+TEXT.DART
+mport 'package:flutter/material.dart';
+
+class TextWidget extends StatelessWidget {
+  const TextWidget({super.key});
+  @override
+  Widget build(context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.facebook, size: 200, color: Colors.blueAccent),
+
+          Container(height: 250, width: 500),
+
+          Container(
+            height: 40,
+            width: 190,
+            child: Text(
+              "  F A C E B O O K",
+
+              style: TextStyle(
+                fontSize: 25,
+                color: const Color.fromARGB(255, 120, 127, 138),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Container(
+                  padding: EdgeInsets.all(7),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.facebook, size: 21),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.all(7),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.messenger, size: 21),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.all(7),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.facebook, size: 21),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.all(7),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.facebook, size: 21),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.all(7),
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Icon(Icons.facebook, size: 21),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
