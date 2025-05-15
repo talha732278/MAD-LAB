@@ -1,0 +1,263 @@
+2.	import 'dart:math';
+3.	import 'package:flutter/material.dart';
+4.	
+5.	void main() {
+6.	  runApp(DiceApp());
+7.	}
+8.	
+9.	class DiceApp extends StatelessWidget {
+10.	  @override
+11.	  Widget build(BuildContext context) {
+12.	    return MaterialApp(
+13.	      title: 'Dice Roller',
+14.	      theme: ThemeData(primarySwatch: Colors.red),
+15.	      home: DiceHomePage(),
+16.	      debugShowCheckedModeBanner: false,
+17.	    );
+18.	  }
+19.	}
+20.	
+21.	class DiceHomePage extends StatefulWidget {
+22.	  @override
+23.	  _DiceHomePageState createState() => _DiceHomePageState();
+24.	}
+25.	
+26.	class _DiceHomePageState extends State<DiceHomePage>
+27.	    with SingleTickerProviderStateMixin {
+28.	  int diceNumber = 1;
+29.	  late AnimationController _controller;
+30.	  late Animation<double> _rotationAnimation;
+31.	
+32.	  @override
+33.	  void initState() {
+34.	    super.initState();
+35.	    _controller = AnimationController(
+36.	      duration: Duration(milliseconds: 500),
+37.	      vsync: this,
+38.	    );
+39.	
+40.	    _rotationAnimation = Tween<double>(
+41.	      begin: 0,
+42.	      end: 2 * pi,
+43.	    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+44.	
+45.	    _controller.addStatusListener((status) {
+46.	      if (status == AnimationStatus.completed) {
+47.	        // After rotation completes, set new dice number
+48.	        setState(() {
+49.	          diceNumber = Random().nextInt(6) + 1;
+50.	        });
+51.	        _controller.reset(); // Ready for next roll
+52.	      }
+53.	    });
+54.	  }
+55.	
+56.	  void rollDice() {
+57.	    _controller.forward(); // Start animation
+58.	  }
+59.	
+60.	  @override
+61.	  void dispose() {
+62.	    _controller.dispose();
+63.	    super.dispose();
+64.	  }
+65.	
+66.	  @override
+67.	  Widget build(BuildContext context) {
+68.	    return Scaffold(
+69.	      appBar: AppBar(
+70.	        title: Text('Dice Roller'),
+71.	        centerTitle: true,
+72.	        backgroundColor: Colors.pinkAccent,
+73.	      ),
+74.	      body: Center(
+75.	        child: Column(
+76.	          mainAxisAlignment: MainAxisAlignment.center,
+77.	          children: [
+78.	            AnimatedBuilder(
+79.	              animation: _rotationAnimation,
+80.	              builder: (context, child) {
+81.	                return Transform.rotate(
+82.	                  angle: _rotationAnimation.value,
+83.	                  child: Image.asset(
+84.	                    'assests/dice$diceNumber.png',
+85.	                    width: 150,
+86.	                    height: 150,
+87.	                  ),
+88.	                );
+89.	              },
+90.	            ),
+91.	
+92.	            ElevatedButton(
+93.	              onPressed: rollDice,
+94.	              child: Text('Roll Dice', style: TextStyle(fontSize: 18)),
+95.	            ),
+96.	          ],
+97.	        ),
+98.	      ),
+99.	    );
+100.	  }
+101.	}
+102.	
+
+
+
+
+Q2.
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyInfoApp());
+}
+
+class MyInfoApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Info App',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MyInfoHomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MyInfoHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3, // Three tabs
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('About Me'),
+          centerTitle: true,
+          backgroundColor: Colors.amberAccent,
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Introduction'),
+              Tab(text: 'Education'),
+              Tab(text: 'Hobbies'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            // Tab 1: Introduction
+            Center(
+              child: Row(
+                children: [
+                  Container(
+                    height: 400,
+                    width: 1000,
+                    padding: EdgeInsets.all(20),
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(fontSize: 25, color: Colors.black),
+                        children: [
+                          TextSpan(
+                            text: 'Hello! ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+
+                          TextSpan(
+                            text:
+                                "I'm Talha Afzaal, a student of BSCS. This is my flutter course project.",
+                          ),
+
+                          TextSpan(
+                            text: 'I am learning flutter. ',
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
+
+                          TextSpan(text: 'and solving real-world problems.'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(150),
+                    height: 500,
+                    width: 500,
+                    child: CircleAvatar(
+                      radius: 20, // Image radius
+                      backgroundImage: AssetImage('assests/talha.png'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Tab 2: Education
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                    children: [
+                      TextSpan(
+                        text: 'Bachelor of Science in Computer Science\n',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.red,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Bahria  University, 2022 - 2026\n',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                      TextSpan(
+                        text:
+                            'Relevant courses: Flutter Development, Data Structures, UI/UX Design.',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // Tab 3: Hobbies
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                    children: [
+                      TextSpan(
+                        text: '🎮 Gaming\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'I enjoy playing strategy and RPG games.\n\n',
+                      ),
+                      TextSpan(
+                        text: '📚 Reading\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Mostly tech blogs and sci-fi novels.\n\n',
+                      ),
+                      TextSpan(
+                        text: '🎵 Music\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Listening to lo-fi and instrumental tracks.',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
